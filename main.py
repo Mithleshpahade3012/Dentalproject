@@ -144,6 +144,7 @@ async def predict(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
 
+
 # Run the API
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
