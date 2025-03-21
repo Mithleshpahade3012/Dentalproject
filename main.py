@@ -124,7 +124,14 @@ async def predict(file: UploadFile = File(...)):
         predicted_class_idx = np.argmax(predictions, axis=1)[0]
         confidence = np.max(predictions)
         predicted_disease = CLASS_NAMES[predicted_class_idx]
-        
+        print("Confidence : ",confidence)
+
+        # ✅ Override conditions:
+        # If confidence < 90% OR predicted class is not "Caries" or "Gingivitis" → Set to "Healthy"
+        if confidence < 0.70 or predicted_disease not in ["caries", "gingivitis"]:
+            predicted_disease = "healthy"
+
+
         # Get condition details
         condition = DISEASE_CONDITIONS[predicted_disease]
         
@@ -132,18 +139,16 @@ async def predict(file: UploadFile = File(...)):
         image_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
         gradcam_image = overlay_gradcam(image_cv, heatmap)
         gradcam_image = encode_image(gradcam_image)
-        print("Grad-CAM Base64 Length:", len(gradcam_image))
 
         return {
             "predicted_disease": predicted_disease,
             "confidence": str(int(confidence * 100)) + "%",
             "condition": condition["condition"],
             "advice": condition["advice"],
-            "gradcam_base64": gradcam_image 
+            "gradcam_base64": gradcam_image
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
-
 
 # Run the API
 if __name__ == "__main__":

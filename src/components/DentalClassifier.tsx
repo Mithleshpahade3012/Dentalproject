@@ -29,7 +29,7 @@ export default function DentalClassifier() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:8000/prediction/", {
+      const response = await fetch("http://127.0.0.1:8000/prediction/", {
         method: "POST",
         body: formData,
       });
@@ -108,15 +108,15 @@ export default function DentalClassifier() {
                     alt="Grad-CAM"
                     className="rounded-lg shadow-md w-[300px]"
                     />
-                    <p className="text-sm text-blue-600 mt-1">Heatmap</p>
+                    <p className="text-sm text-blue-600 mt-1"></p>
                 </div>
                 )}
 
                 <div className="text-center mt-4">
-                <p className="text-lg font-bold mb-2">Disease: <span className="text-red-500">{prediction.predicted_disease}</span></p>
-                <p className="text-lg font-semibold mb-2">Condition: <span className="text-gray-700">{prediction.condition}</span></p>
-                <p className="text-sm text-gray-600 mb-2">Accuracy: <span className="text-green-500">{prediction.confidence}</span></p>
-                <p className="text-sm text-gray-600 mb-2">Advice: <span className="text-gray-700">{prediction.advice}</span></p>
+                <p className="text-3xl font-bold mb-2">Disease: <span className="text-red-500">{prediction.predicted_disease}</span></p>
+                <p className="text-3xl font-bold mb-2">Condition: <span className="text-gray-900">{prediction.condition}</span></p>
+                <p className="text-2xl  font-bold text-gray-600 mb-2">Disease Accuracy: <span className="text-green-500">{prediction.confidence}</span></p>
+                <p className="text-lg text-gray-600 mb-2">Advice: <span className="text-gray-700">{prediction.advice}</span></p>
                 <Button onClick={handleReupload} className="mt-4 w-full text-black bg-red-50 hover:bg-red-500">
                     Close
                 </Button>
