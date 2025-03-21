@@ -29,7 +29,7 @@ export default function DentalClassifier() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/prediction/", {
+      const response = await fetch("http://192.168.1.45:8000/predict", {
         method: "POST",
         body: formData,
       });
@@ -113,7 +113,7 @@ export default function DentalClassifier() {
                 )}
 
                 <div className="text-center mt-4">
-                <p className="text-3xl font-bold mb-2">Disease: <span className="text-red-500">{prediction.predicted_disease}</span></p>
+                <p className="text-3xl font-bold mb-2">Disease: <span className="text-grey-900">{prediction.predicted_disease}</span></p>
                 <p className="text-3xl font-bold mb-2">Condition: <span className="text-gray-900">{prediction.condition}</span></p>
                 <p className="text-2xl  font-bold text-gray-600 mb-2">Disease Accuracy: <span className="text-green-500">{prediction.confidence}</span></p>
                 <p className="text-lg text-gray-600 mb-2">Advice: <span className="text-gray-700">{prediction.advice}</span></p>
