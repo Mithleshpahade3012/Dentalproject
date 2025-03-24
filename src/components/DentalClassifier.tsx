@@ -29,7 +29,7 @@ export default function DentalClassifier() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://192.168.1.45:8000/predict", {
+      const response = await fetch("http://10.214.37.56:8000/predict", {
         method: "POST",
         body: formData,
       });
