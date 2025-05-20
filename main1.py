@@ -205,10 +205,5 @@ def predict():
         return jsonify({"error": f"Prediction error: {str(e)}"}), 500
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     serve(app, host="0.0.0.0", port=8000)
-=======
-    import uvicorn  
 
-    uvicorn.run(asgi_app, host="0.0.0.0", port=8000)
->>>>>>> ee2f2ece590cc0ae72e712c9c3d87a753d8de04c
