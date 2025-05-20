@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from waitress import serve
 from asgiref.wsgi import WsgiToAsgi
 import torch
 import torch.nn as nn
@@ -203,9 +204,5 @@ def predict():
     except Exception as e:
         return jsonify({"error": f"Prediction error: {str(e)}"}), 500
 
-asgi_app = WsgiToAsgi(app)
-
 if __name__ == "__main__":
-    import uvicorn  
-
-    uvicorn.run(asgi_app, host="127.0.0.1", port=8000)
+    serve(app, host="0.0.0.0", port=8000)
