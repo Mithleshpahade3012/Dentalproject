@@ -164,7 +164,7 @@ def overlay_heatmap(image, heatmap):
     superimposed_img = cv2.addWeighted(image, 0.6, heatmap, 0.4, 0)  # Blend images
     return superimposed_img
 
-@app.route("/api/predict/", methods=["POST"])
+@app.route("/predict/", methods=["POST"])
 def predict():
     try:
         if "file" not in request.files:
